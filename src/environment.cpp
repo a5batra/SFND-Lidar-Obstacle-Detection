@@ -51,7 +51,7 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
 //    renderRays(viewer, lidar->position, pointCloud);
     renderPointCloud(viewer, pointCloud, "Highway Point Cloud");
     // TODO:: Create point processor
-
+    ProcessPointClouds<pcl::PointXYZ>* pointProcessor = new ProcessPointClouds<pcl::PointXYZ>();
   
 }
 
