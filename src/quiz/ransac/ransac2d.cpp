@@ -120,12 +120,12 @@ std::unordered_set<int> Ransac(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int ma
 
 }
 
-std::unordered_set<int> RansacPlane(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int maxInterations, float distanceTol) {
+std::unordered_set<int> RansacPlane(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int maxIterations, float distanceTol) {
     std::unordered_set<int> inliersResult;
 
     auto startTime = std::chrono::steady_clock::now();
 
-    while (maxInterations--) {
+    while (maxIterations--) {
         std::unordered_set<int> inliers;
         while (inliers.size() < 3) inliers.insert(rand() % cloud->points.size());
         auto it = inliers.begin();
