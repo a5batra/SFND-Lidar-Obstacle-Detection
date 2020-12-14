@@ -27,7 +27,7 @@ struct KdTree
 	void insertHelper(Node* &root, std::vector<float> point, int id, int currDepth) {
 	    if (root == nullptr) {
             root = new Node(point, id);
-	        return;
+            return;
 	    }
 
         int dim = currDepth % 2;
