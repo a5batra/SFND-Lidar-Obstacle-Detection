@@ -30,7 +30,7 @@ struct KdTree
             return;
 	    }
 
-        int dim = currDepth % 2;
+        int dim = currDepth % 3;
         if (point[dim] < root->point[dim]) {
             insertHelper(root->left, point, id, currDepth + 1);
         }
@@ -48,13 +48,17 @@ struct KdTree
 
 	void searchHelper(Node* &root, std::vector<float>& target, float distanceTol, std::vector<int>& ids, int currDepth) {
 	    if (root != nullptr) {
-	        if ((root->point[0] >= (target[0] - distanceTol) && root->point[0] <= (target[0] + distanceTol)) && (root->point[1] >= (target[1] - distanceTol) && root->point[1] <= (target[1] + distanceTol))) {
-	            float x = target[0], y = target[1];
-	            float x1 = root->point[0], y1 = root->point[1];
-	            float dist = sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1));
-	            if (dist <= distanceTol) ids.push_back(root->id);
+	        if ((root->point[0] >= (target[0] - distanceTol) && root->point[0] <= (target[0] + distanceTol)) &&
+	        (root->point[1] >= (target[1] - distanceTol) && root->point[1] <= (target[1] + distanceTol)) &&
+	        (root->point[2] >= (target[2] - distanceTol) && root->point[2] <= (target[2] + distanceTol))) {
+	            float x = target[0], y = target[1], z = target[2];
+	            float x1 = root->point[0], y1 = root->point[1], z1 = root->point[2];
+	            float dist = sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1) + (z - z1) * (z - z1));
+	            if (dist <= distanceTol) {
+                    ids.push_back(root->id);
+	            }
 	        }
-	        int dim = currDepth % 2;
+	        int dim = currDepth % 3;
 	        if (root->point[dim] >= target[dim] - distanceTol) searchHelper(root->left, target, distanceTol, ids, currDepth + 1);
 	        if (root->point[dim] <= target[dim] + distanceTol) searchHelper(root->right, target, distanceTol, ids, currDepth + 1);
 	    }
